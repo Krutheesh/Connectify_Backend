@@ -14,6 +14,9 @@ app.use(express.json())
 app.use(cookieParser());
 app.use('/api', routes);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Connectify API");  
+});
 
 
 module.exports = app;
