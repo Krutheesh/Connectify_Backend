@@ -1,6 +1,6 @@
 const asyncHandler = require("../utils/asyncHandler");
 const User = require("../models/userModel");
-const {upsertStreamUser} = require("../config/stream");
+const { upsertStreamUser } = require("../../config/stream");
 const cookieOptions = {
   expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
   httpOnly: true,
@@ -36,12 +36,12 @@ module.exports.signup = asyncHandler(async (req, res) => {
       id: user._id.toString(),
       name: user.name,
       image: user.profilePic || "",
-    })
-  console.log("Stream user upserted successfully");
+    });
+    console.log("Stream user upserted successfully");
   } catch (error) {
     console.error("Error upserting Stream user:", error?.message);
   }
-  
+
   const token = user.getJwtToken();
   user.password = undefined;
 
@@ -97,22 +97,25 @@ module.exports.logout = asyncHandler(async (_req, res) => {
   });
 });
 
-module.exports.onboard = asyncHandler(async(req,res) => {
-
+module.exports.onboard = asyncHandler(async (req, res) => {
   const userId = req.user;
-  
-  const {name, bio, nativeLanguage, learningLanguage, location} = req.body;
-  console.log(name, bio, nativeLanguage, learningLanguage, location)
-  if(!name || !bio || !nativeLanguage || !learningLanguage || !location) {
+
+  const { name, bio, nativeLanguage, learningLanguage, location } = req.body;
+  console.log(name, bio, nativeLanguage, learningLanguage, location);
+  if (!name || !bio || !nativeLanguage || !learningLanguage || !location) {
     throw new Error("Please fill all the fields");
   }
-  const updateUser = await User.findByIdAndUpdate(userId,{
-    ...req.body,
-    isOnboarded:true,
-  },{
-    new:true
-  })
-  if(!updateUser){
+  const updateUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      ...req.body,
+      isOnboarded: true,
+    },
+    {
+      new: true,
+    }
+  );
+  if (!updateUser) {
     throw new Error("User not found");
   }
   try {
@@ -120,27 +123,27 @@ module.exports.onboard = asyncHandler(async(req,res) => {
       id: updateUser._id.toString(),
       name: updateUser.name,
       image: updateUser.profilePic || "",
-    })
-  console.log("Stream onboard user upserted successfully");
+    });
+    console.log("Stream onboard user upserted successfully");
   } catch (error) {
     console.error("Error onboard  upserting Stream user:", error?.message);
   }
- res.status(200).json({
-  sucess:true,
-  user:updateUser
- })
-})
+  res.status(200).json({
+    sucess: true,
+    user: updateUser,
+  });
+});
 //forgot password
 //reset password
 //getProfile
-module.exports.getProfile = asyncHandler(async(req,res) => {
+module.exports.getProfile = asyncHandler(async (req, res) => {
   const user = req.user;
-  
-  if(!user) {
+
+  if (!user) {
     throw new Error("User not found");
   }
   res.status(200).json({
-    success:true,
-    user
-  })
-} )
+    success: true,
+    user,
+  });
+});

@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { isLoggedIn } = require("../middlewares/authMiddleware");
-const { getStreamToken } = require("../controllers/chatController");
+const { isLoggedIn } = require("../../middlewares/authMiddleware");
+const { getStreamToken } = require("../../controllers/chatController");
 getStreamToken;
 const router = Router();
 

@@ -1,6 +1,6 @@
 const JWT = require("jsonwebtoken");
-const User = require("./../models/userModel");
-const asyncHandler = require("./../utils/asyncHandler");
+const User = require("../models/userModel");
+const asyncHandler = require("../utils/asyncHandler");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -8,7 +8,7 @@ module.exports.isLoggedIn = asyncHandler(async (req, res, next) => {
   // console.log(process.env.JWT_SECRET_KEY);
   let token;
   // console.log("cookie")
-  console.log("--",req.cookies.token);
+  console.log("--", req.cookies.token);
   if (
     req.cookies.token ||
     (req.headers.authorization &&
