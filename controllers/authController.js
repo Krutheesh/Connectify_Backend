@@ -1,6 +1,6 @@
 const asyncHandler = require("../utils/asyncHandler");
 const User = require("../models/userModel");
-const { upsertStreamUser } = require("../../config/stream");
+const { upsertStreamUser } = require("../config/stream");
 const cookieOptions = {
   expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
   httpOnly: true,

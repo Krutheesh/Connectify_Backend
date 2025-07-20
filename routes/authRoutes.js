@@ -1,12 +1,12 @@
 const { Router } = require("express");
-const { isLoggedIn } = require("../../middlewares/authMiddleware");
+const { isLoggedIn } = require("../middlewares/authMiddleware");
 const {
   signup,
   signin,
   logout,
   onboard,
   getProfile,
-} = require("../../controllers/authController");
+} = require("../controllers/authController");
 
 const router = Router();
 
