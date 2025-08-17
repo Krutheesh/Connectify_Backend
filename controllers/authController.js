@@ -91,6 +91,8 @@ module.exports.logout = asyncHandler(async (_req, res) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
     httpOnly: true,
+    sameSite: "None",
+  secure: true
   });
 
   res.status(200).json({
